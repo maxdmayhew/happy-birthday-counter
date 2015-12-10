@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-
+import java.awt.GraphicsEnvironment;
 public class happyBirthday extends JFrame implements ActionListener {
 	
 
@@ -36,6 +36,7 @@ public class happyBirthday extends JFrame implements ActionListener {
 	public static void main(String [] agrs)
 	{
 		new happyBirthday();
+		//checkMyLanguages();
 	}
 
 	@Override
@@ -44,5 +45,14 @@ public class happyBirthday extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public static void checkMyLanguages()
+	{
+		String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 		
+		for (int i = 0; i < fonts.length; i ++)
+		{
+			System.out.println(fonts[i]);
+		}
+	}
 }

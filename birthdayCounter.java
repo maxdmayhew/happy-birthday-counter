@@ -1,32 +1,28 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.GridBagLayout;
-import java.awt.GridBagLayoutInfo;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Timer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
+import javax.swing.Timer;
 
 public class birthdayCounter extends JPanel implements ActionListener
 {
 	private int dayValue;
 	private int monthValue;
-	private JLabel[] seperator;
-	private JLabel second;
-	private JLabel hour;
-	private JLabel minute;
-	
+	private DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
+	private JLabel clock;
 
 	public birthdayCounter() 
 	{
@@ -35,37 +31,42 @@ public class birthdayCounter extends JPanel implements ActionListener
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}catch (ClassNotFoundException error) {} catch (InstantiationException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		Font newFont = new Font("Times New Roman", Font.BOLD, 18);
+		
 		
 		JPanel b1 = new JPanel();
 		setLayout(new GridLayout(1,3));
 		b1.setBorder(BorderFactory.createLineBorder(Color.black));
+		b1.setFont(newFont);
 		
-		second = new JLabel();
-		hour = new JLabel();
-		minute = new JLabel();
+		clock = new JLabel("...");
+		clock.setFont(clock.getFont().deriveFont(newFont.BOLD, 72f));
 		
-		changeDimension(second);
-		changeDimension(hour);
-		changeDimension(minute);
+		b1.add(clock);
+		updateClock();
 		
-		b1.add(hour);
-		b1.add(minute);
-		b1.add(second);
+		ActionListener callUpdateClock = new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				updateClock();
+			}
+		};
+		
+		Timer timer = new Timer(500, callUpdateClock);
+		timer.start();		
 		
 		add(b1);
 		
-		//Timer t = new Timer(500, new timerListener());
 				
 		
 	}
@@ -79,6 +80,20 @@ public class birthdayCounter extends JPanel implements ActionListener
 	
 	
 	
+	private void updateClock()
+	{
+		clock.setText(dateFormat.format(System.currentTimeMillis()));
+	}
+
+
+
+
+
+
+
+
+
+
 	private Dimension changeDimension(JLabel second2)
 	{
 		// TODO Auto-generated method stub

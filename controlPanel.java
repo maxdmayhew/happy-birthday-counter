@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,8 +35,10 @@ public class controlPanel extends JPanel implements ActionListener
 		bdp = bdPanel;
 		
 		setBackground(Color.LIGHT_GRAY);
-		setPreferredSize(new Dimension(500, 200));
+		setPreferredSize(new Dimension(500, 75));
 		setLayout(new BorderLayout());
+		Font newFont = new Font("Times New Roman", Font.BOLD, 18);
+
 		
 		JPanel p1 = new JPanel();
 		finished = new JButton("Finished");
@@ -45,6 +48,7 @@ public class controlPanel extends JPanel implements ActionListener
 		reset.addActionListener(new resetListener());
 		p1.add(reset);
 		p1.setPreferredSize(new Dimension(200,50));
+		p1.setFont(newFont);
 		add(p1, BorderLayout.NORTH);
 		
 		//** Adding the combo boxes for picking your date **//
